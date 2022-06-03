@@ -1,13 +1,19 @@
-import dearpygui as d
+from PyQt6.QtWidgets import QApplication, QWidget
+
+import sys # Только для доступа к аргументам командной строки
+
+# Приложению нужен один (и только один) экземпляр QApplication.
+# Передаём sys.argv, чтобы разрешить аргументы командной строки для приложения.
+# Если не будете использовать аргументы командной строки, QApplication([]) тоже работает
+app = QApplication(sys.argv)
+
+# Создаём виджет Qt — окно.
+window = QWidget()
+window.show()  # Важно: окно по умолчанию скрыто.
+
+# Запускаем цикл событий.
+app.exec()
 
 
-def save_callback(sender, data):
-    print("Save Clicked")
-
-
-d.core.add_text("Hello, world")
-d.core.add_button("Save", callback=save_callback)
-d.core.add_input_text("string", default_value="Quick brown fox")
-d.core.add_slider_float("float", default_value=0.273, max_value=1)
-
-d.core.start_dearpygui()
+# Приложение не доберётся сюда, пока вы не выйдете и цикл
+# событий не остановится.
